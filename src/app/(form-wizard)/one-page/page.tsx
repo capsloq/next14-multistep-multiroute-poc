@@ -2,43 +2,32 @@
 
 import { useFormContext } from "react-hook-form"
 import { FormWrapper } from "../info/page"
-import { useRouter } from "next/navigation"
 import React from "react"
 import { Step, StepActions, useStep } from "@/components/stepper/stepper"
 
-
 export default function SuccessPage() {
-   const router = useRouter()
-
    const { register, watch, formState, trigger } = useFormContext()
    const { setCurrentStep, setOnSubmit } = useStep()
 
-
-   const { isValid, errors } = formState;
-   
-
-  
+   const { errors } = formState
 
    React.useEffect(() => {
       console.log("On Submit overwritten by Child")
       setOnSubmit(() => {
-         return (data:any) => {
+         return (data: any) => {
             console.log("FROM CHILD!!!!:", data)
          }
       })
    }, [setOnSubmit])
 
-
    const validateStepOne = async () => {
-      await trigger();
+      console.log("Validating Step One")
+      const isValid = await trigger(["testinfo"])
+
       if (isValid) {
          setCurrentStep("success")
       }
-    };
-
-
-
-
+   }
 
    return (
       <FormWrapper
@@ -53,9 +42,7 @@ export default function SuccessPage() {
                {...register("testinfo", { required: "This field is required." })}
             />
             {errors.testinfo && (
-              <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-red-400">
-                {errors.testinfo.message?.toString()}
-              </span>
+               <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-red-400">{errors.testinfo.message?.toString()}</span>
             )}
             <StepActions>
                <button
@@ -71,8 +58,11 @@ export default function SuccessPage() {
             <div className="text-5xl"> SUCCESS Page </div>
             <input
                className="text-gray-900"
-               {...register("testsuccess")}
+               {...register("testsuccess", { required: "Test Succes field is required." })}
             />
+               {errors.testsuccess && (
+               <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-red-400">{errors.testsuccess.message?.toString()}</span>
+            )}
             <StepActions>
                <button
                   type="button"
