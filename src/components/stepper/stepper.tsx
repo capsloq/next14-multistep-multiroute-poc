@@ -1,9 +1,13 @@
 import { cn } from "@/lib/utils"
 import React from "react"
+import { FieldValues, SubmitHandler } from "react-hook-form"
 
 type StepperContextType = {
    currentStep: string
    setCurrentStep: (step: string) => void
+   onSubmit: SubmitHandler<FieldValues>
+   setOnSubmit: (onSubmit: SubmitHandler<FieldValues>) => void
+
 }
 
 interface StepperProps extends React.HTMLAttributes<HTMLElement> {
@@ -15,9 +19,14 @@ const StepperContext = React.createContext<undefined | StepperContextType>(undef
 
 export function Stepper({ children, className, defaultValue }: StepperProps) {
    const [currentStep, setCurrentStep] = React.useState(defaultValue ?? "")
+   const [onSubmit, setOnSubmit] = React.useState<SubmitHandler<FieldValues>>(() => {
+      return (data: FieldValues) => {
+         console.log("Default onSubmit, data:", data)
+      }
+   })
 
    return (
-      <StepperContext.Provider value={{ currentStep, setCurrentStep }}>
+      <StepperContext.Provider value={{ currentStep, setCurrentStep, onSubmit, setOnSubmit }}>
          <div className={cn("bg-gray-700 p-4", className)}>{children}</div>
       </StepperContext.Provider>
    )
