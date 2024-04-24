@@ -52,10 +52,6 @@ export default function InfoPage() {
 
 // const FormContext = React.createContext()
 
-interface FormWrapperProps extends React.HTMLAttributes<HTMLElement> {
-   children: React.ReactNode
-   heading: string
-   description: string
-}
+
 
 

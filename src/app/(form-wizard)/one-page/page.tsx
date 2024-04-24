@@ -6,13 +6,14 @@ import React from "react"
 import { Step, StepActions, useStep } from "@/components/stepper/stepper"
 
 export default function SuccessPage() {
-   const { register, watch, formState, trigger } = useFormContext()
+   const { register, formState, trigger } = useFormContext()
    const { setCurrentStep, setOnSubmit } = useStep()
 
    const { errors } = formState
 
-   React.useEffect(() => {
-      console.log("On Submit overwritten by Child")
+
+   // UseEffect to set the onSubmit function
+   React.useEffect(() => {      
       setOnSubmit(() => {
          return (data: any) => {
             console.log("FROM CHILD!!!!:", data)
@@ -20,8 +21,7 @@ export default function SuccessPage() {
       })
    }, [setOnSubmit])
 
-   const validateStepOne = async () => {
-      console.log("Validating Step One")
+   const validateStepOne = async () => {      
       const isValid = await trigger(["testinfo"])
 
       if (isValid) {
@@ -60,7 +60,7 @@ export default function SuccessPage() {
                className="text-gray-900"
                {...register("testsuccess", { required: "Test Succes field is required." })}
             />
-               {errors.testsuccess && (
+            {errors.testsuccess && (
                <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-red-400">{errors.testsuccess.message?.toString()}</span>
             )}
             <StepActions>
