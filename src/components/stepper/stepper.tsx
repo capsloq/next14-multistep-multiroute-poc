@@ -27,7 +27,7 @@ export function Stepper({ children, className, defaultValue }: StepperProps) {
 
    return (
       <StepperContext.Provider value={{ currentStep, setCurrentStep, onSubmit, setOnSubmit }}>
-         <div className={cn("bg-gray-700 p-4", className)}>{children}</div>
+         <div className={cn("bg-gray-900 p-4 text-white", className)}>{children}</div>
       </StepperContext.Provider>
    )
 }

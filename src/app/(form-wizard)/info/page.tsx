@@ -4,6 +4,13 @@ import { useRouter } from "next/navigation"
 import React from "react"
 import { useFormContext } from "react-hook-form"
 
+// Wrapper should be in it's own file *************************************************
+type FormWrapperProps = React.HTMLAttributes<HTMLElement> & {
+   children: React.ReactNode
+   heading: string
+   description: string
+}
+
 export function FormWrapper({ children, className, heading, description, ...props }: FormWrapperProps) {
    return (
       <section
@@ -14,12 +21,13 @@ export function FormWrapper({ children, className, heading, description, ...prop
             className
          )}
       >
-         <h1 className="text-2xl lg:text-[34px] font-bold text-marine-blue">{heading}</h1>
-         <p className="text-cool-gray mt-1">{description}</p>
+         <h1 className="text-2xl lg:text-[34px] font-bold">{heading}</h1>
+         <p className="mt-1">{description}</p>
          {children}
       </section>
    )
 }
+// *************************************************************************************
 
 export default function InfoPage() {
    const router = useRouter()
@@ -33,19 +41,22 @@ export default function InfoPage() {
       >
          {/* Add Form Fields (...register) */}
          <div> Info Page </div>
-         <input
-            className="text-gray-900"
-            {...register("test")}
-         />
-
-         <button
-            type="button"
-            onClick={() => router.push("/success")}
-         >
-            Next
-         </button>
+         <div className="flex gap-4 mt-4">
+            <label htmlFor="test">Test Input</label>
+            <input
+               className="text-gray-900"
+               {...register("test")}
+            />
+         </div>
+         <div className="flex gap-4 mt-4">
+            <button
+               type="button"
+               className="bg-blue-500 p-2 rounded"
+               onClick={() => router.push("/success")}
+            >
+               Next
+            </button>
+         </div>
       </FormWrapper>
    )
 }
-
-// const FormContext = React.createContext()

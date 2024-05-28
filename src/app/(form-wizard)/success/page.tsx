@@ -15,22 +15,29 @@ export default function SuccessPage() {
          description="Thank you! You have successfully completed the form. You can now rest in peace."
       >
          {/* Add Form Fields (...register) */}
-         <div className="text-5xl"> SUCCESS Page </div>
-         <input
-            className="text-gray-900"
-            {...register("testsuccess")}
-         />
-         <button
-            type="button"
-            onClick={() => router.push("/info")}
-         >
-            Prev
-         </button>
-         <button type="submit">Submit</button>
 
-         {/* <FormActions>
-           <button>Next</button>
-       </FormActions> */}
+         <div className="flex gap-4 mt-4">
+            <label htmlFor="test">TestSuccess Input</label>
+            <input
+               className="text-gray-900"
+               {...register("testsuccess")}
+            />
+         </div>
+         <div className="flex gap-4 mt-4">
+            <button
+               type="button"
+               className="bg-blue-500 p-2 rounded"
+               onClick={() => router.push("/info")}
+            >
+               Prev
+            </button>
+            <button
+               className="bg-green-500 p-2 rounded"
+               type="submit"
+            >
+               Submit
+            </button>
+         </div>
       </FormWrapper>
    )
 }
