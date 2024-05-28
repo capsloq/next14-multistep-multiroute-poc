@@ -1,10 +1,8 @@
 "use client"
 import { cn } from "@/lib/utils"
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"
 import React from "react"
 import { useFormContext } from "react-hook-form"
-
-
 
 export function FormWrapper({ children, className, heading, description, ...props }: FormWrapperProps) {
    return (
@@ -24,15 +22,10 @@ export function FormWrapper({ children, className, heading, description, ...prop
 }
 
 export default function InfoPage() {
-  
    const router = useRouter()
    const { register, watch } = useFormContext()
    console.log("🚀 ~ getValues:", watch())
-  
-   
 
- 
-   
    return (
       <FormWrapper
          heading="Information"
@@ -40,18 +33,19 @@ export default function InfoPage() {
       >
          {/* Add Form Fields (...register) */}
          <div> Info Page </div>
-         <input className="text-gray-900" {...register("test")} />
+         <input
+            className="text-gray-900"
+            {...register("test")}
+         />
 
-         {/* <FormActions> */}
-            {/* <button>Prev</button> */}
-            <button type="button" onClick={ () => router.push('/success')}>Next</button>
-        {/* </FormActions> */}
+         <button
+            type="button"
+            onClick={() => router.push("/success")}
+         >
+            Next
+         </button>
       </FormWrapper>
    )
 }
 
 // const FormContext = React.createContext()
-
-
-
-

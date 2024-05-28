@@ -31,8 +31,8 @@ export default function SuccessPage() {
 
    return (
       <FormWrapper
-         heading="One Pager Form"
-         description="All Steps in one Page."
+         heading="Multi Step Multi Route Form"
+         description="Every step is a different route."
       >
          {/* Add Form Fields (...register) */}
          <Step value="info">
